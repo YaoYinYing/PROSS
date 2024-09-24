@@ -1,0 +1,47 @@
+name: Test in docker
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/ci.yml' # monitor the main workflow script.
+      - 'run_pross_parallel.sh'
+      - 'scripts/*'
+      - 'utils/*'
+
+    branches:
+        - main
+
+
+jobs:
+  DevTests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: 
+          - 'ubuntu-latest'
+
+
+    runs-on: ${{ matrix.os }}
+  
+
+    container: 
+      image: rosettacommons/rosetta:latest
+
+
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup test environment
+        run: |
+          python -V; python -m eusurepip; bash tests/scripts/setup_for_ci.sh
+    
+      - name: Run testcase - monomer
+        run: |
+            bash tests/scripts/run_3afp_hf3_A.sh
+          
