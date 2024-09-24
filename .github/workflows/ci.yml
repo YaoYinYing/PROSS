@@ -8,6 +8,7 @@ on:
       - 'run_pross_parallel.sh'
       - 'scripts/*'
       - 'utils/*'
+      - 'tests/scripts/*'
 
     branches:
         - main
