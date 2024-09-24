@@ -1,5 +1,5 @@
 pip install rosetta_finder -U
-apt-get update -y; apt-get install perl wget -y
+apt-get update -y; apt-get install perl wget build-essential -y
 
 wget https://ftpmirror.gnu.org/parallel/parallel-latest.tar.bz2 -O parallel.tar.bz2
 
